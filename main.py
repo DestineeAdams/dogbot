@@ -1,6 +1,6 @@
 from cProfile import run
 from http import client
-import os, discord, requests, time
+import os, discord, time
 from urllib import response
 from dotenv import load_dotenv
 import handleDogAPI as hdapi
@@ -22,13 +22,12 @@ async def on_ready():
 @client.event
 async def on_message(message):
     username = str(message.author).split('#')[0]
-    print(username)
 
     if message.author == client.user:
         return
     
     # if (message.channel == "dog-bot"):
-    if (message.channel == ("test-bot" or  "dog-bot")):
+    if (message.channel != ("test-bot" or  "dog-bot")):
         return
 
 
@@ -36,10 +35,16 @@ async def on_message(message):
         time.sleep(2)
         await message.channel.send(f'Hello! {username} 😸')
 
+
+
+
     if message.content.startswith('$give me dog picture'):
         time.sleep(2)
         await message.channel.send(f'here you go')
         await message.channel.send(hdapi.getdog())
+
+
+
 
     if message.content.startswith('$commands'):
         time.sleep(2)
@@ -49,7 +54,9 @@ async def on_message(message):
 
 
 
-    
+    @bot.slash_command(name = "hello", description = "Say hello to the bot")
+    async def hello(ctx):
+        await ctx.send("Hey!")
 
 client.run(os.getenv('TOKEN'))
 
