@@ -22,11 +22,12 @@ async def on_ready():
 @client.event
 async def on_message(message):
     username = str(message.author).split('#')[0]
-    print(message)
+
     if message.author == client.user:
         return
     
-    if ((message.channel == "dog-bot") or (message.channel == "test-bot")):
+    # if ((message.channel == "dog-bot") or (message.channel == "test-bot")):
+    if ((message.channel == "dog-bot")):
         return
 
 
@@ -50,11 +51,6 @@ async def on_message(message):
         await message.channel.send("$hello dogbot")
         await message.channel.send("$give me dog picture")
 
-
-
-    @bot.slash_command(name = "hello", description = "Say hello to the bot")
-    async def hello(ctx):
-        await ctx.send("Hey!")
 
 client.run(os.getenv('TOKEN'))
 
