@@ -22,19 +22,17 @@ async def on_ready():
 @client.event
 async def on_message(message):
     username = str(message.author).split('#')[0]
-
+    print(message)
     if message.author == client.user:
         return
     
-    # if (message.channel == "dog-bot"):
-    if (message.channel != ("test-bot" or  "dog-bot")):
+    if ((message.channel == "dog-bot") or (message.channel == "test-bot")):
         return
 
 
     if message.content.startswith('$hello dogbot'):
         time.sleep(2)
         await message.channel.send(f'Hello! {username} 😸')
-
 
 
 
